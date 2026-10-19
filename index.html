@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaz Ahmad | Full-Stack & Frontend Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom Glassmorphism Styles */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Gradient Accent text */
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-2 text-xl font-bold text-slate-900 dark:text-white">
+                    <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        MA
+                    </span>
+                    <span class="tracking-tight">Maaz<span class="text-sky-500">.dev</span></span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">About</a>
+                    <a href="#skills" class="text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Skills</a>
+                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Projects</a>
+                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions: Dark Mode Toggle & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2.5 rounded-xl bg-slate-200/60 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                        <i id="theme-toggle-dark-icon" class="hidden fa-solid fa-moon text-lg"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fa-solid fa-sun text-lg"></i>
+                    </button>
+
+                    <!-- Mobile Hamburger Toggle -->
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden p-2.5 rounded-xl bg-slate-200/60 dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:outline-none">
+                        <i class="fa-solid fa-bars text-lg" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-slate-50/95 dark:bg-slate-900/95 backdrop-blur-lg">
+            <div class="px-4 pt-3 pb-6 space-y-2">
+                <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">About</a>
+                <a href="#skills" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Skills</a>
+                <a href="#projects" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Projects</a>
+                <a href="#contact" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-16">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden py-16">
+            <!-- Background Decorative Elements -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-sky-400/20 dark:bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-10 w-72 h-72 bg-indigo-500/20 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 text-xs sm:text-sm font-semibold mb-6 border border-sky-200 dark:border-sky-800/50 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    BS Information Technology Student
+                </div>
+
+                <!-- Main Name Header -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+                    Hi, I'm <span class="gradient-text">Maaz Ahmad</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <h2 class="text-xl sm:text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-6">
+                    Full-Stack &amp; Frontend Developer
+                </h2>
+
+                <!-- Tagline -->
+                <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                    Passionate about crafting dynamic, user-centric web applications with modern technologies like React, Node.js, Express, MongoDB, and SQL.
+                </p>
+
+                <!-- CTA Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <a href="#projects" class="px-6 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-medium shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-sm"></i> View Projects
+                    </a>
+                    <a href="#contact" class="px-6 py-3.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-medium transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-regular fa-envelope text-sm"></i> Contact Me
+                    </a>
+                    <button onclick="downloadResumeSim()" class="px-6 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-sky-500 dark:hover:border-sky-400 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-download text-sm"></i> Download Resume
+                    </button>
+                </div>
+
+                <!-- Quick Tech Stack Icons -->
+                <div class="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-6 text-slate-400 dark:text-slate-500 text-2xl">
+                    <i class="fa-brands fa-react hover:text-sky-400 transition-colors" title="React"></i>
+                    <i class="fa-brands fa-js hover:text-yellow-400 transition-colors" title="JavaScript"></i>
+                    <i class="fa-brands fa-node-js hover:text-green-500 transition-colors" title="Node.js"></i>
+                    <i class="fa-brands fa-html5 hover:text-orange-500 transition-colors" title="HTML5"></i>
+                    <i class="fa-brands fa-css3-alt hover:text-blue-500 transition-colors" title="CSS3"></i>
+                    <i class="fa-solid fa-database hover:text-emerald-400 transition-colors" title="Database/SQL"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="py-20 bg-slate-100/70 dark:bg-slate-800/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">About Me</h2>
+                    <div class="w-16 h-1 bg-sky-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Avatar / Visual Box -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden glass p-3 border border-sky-200/50 dark:border-sky-800/50 shadow-xl">
+                            <div class="w-full h-full bg-gradient-to-tr from-slate-800 to-sky-900 rounded-xl flex flex-col items-center justify-center p-6 text-center text-white relative">
+                                <i class="fa-solid fa-user-graduate text-6xl text-sky-400 mb-4"></i>
+                                <h3 class="text-xl font-bold">Maaz Ahmad</h3>
+                                <p class="text-sm text-sky-200 mt-1">IT Student &amp; Developer</p>
+                                <span class="text-xs bg-sky-500/30 text-sky-300 px-3 py-1 rounded-full mt-3 border border-sky-400/30">
+                                    NCBAE
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Details & Narrative -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+                            Building Modern Web Solutions with Passion
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                            I am a **BS Information Technology student at NCBAE**, passionately focused on modern web engineering, database architecture, and full-stack software development. 
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                            My goal is to translate complex backend systems into intuitive, high-performance front-end experiences. I enjoy taking on full lifecycle development tasks—from database schema design in MongoDB and relational SQL databases to component-driven reactive UI buildouts.
+                        </p>
+
+                        <!-- Key Highlights Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="glass-card p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                                <div class="p-2.5 rounded-lg bg-sky-500/10 text-sky-500">
+                                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 dark:text-white">Education</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">BS Information Technology, NCBAE</p>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+                                <div class="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-500">
+                                    <i class="fa-solid fa-layer-group text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-slate-900 dark:text-white">Focus</h4>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Frontend &amp; MERN Stack Architecture</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Skills &amp; Expertise</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Technologies and tools I work with daily</p>
+                    <div class="w-16 h-1 bg-sky-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Frontend Skills Group -->
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-desktop"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Frontend Development</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Skill Item: React -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-react text-sky-400"></i> React
+                                    </span>
+                                    <span class="text-slate-500">88%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-2.5 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: JavaScript -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-js text-yellow-400"></i> JavaScript (ES6+)
+                                    </span>
+                                    <span class="text-slate-500">85%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: HTML5 & CSS3 -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-html5 text-orange-500"></i> HTML5 &amp; CSS3
+                                    </span>
+                                    <span class="text-slate-500">92%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-2.5 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: Styling Frameworks -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-paint-brush text-indigo-400"></i> Express UI / Styling
+                                    </span>
+                                    <span class="text-slate-500">82%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-2.5 rounded-full" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backend & Database Skills Group -->
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Backend &amp; Database</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Skill Item: Node.js -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-node-js text-green-500"></i> Node.js
+                                    </span>
+                                    <span class="text-slate-500">80%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: Express.js -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-network-wired text-slate-400"></i> Express.js
+                                    </span>
+                                    <span class="text-slate-500">82%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full" style="width: 82%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: MongoDB -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-leaf text-emerald-500"></i> MongoDB &amp; Mongoose
+                                    </span>
+                                    <span class="text-slate-500">78%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Skill Item: SQL -->
+                            <div>
+                                <div class="flex justify-between text-sm font-medium mb-1">
+                                    <span class="text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-database text-sky-500"></i> SQL / Relational DBs
+                                    </span>
+                                    <span class="text-slate-500">80%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-700/60 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-20 bg-slate-100/70 dark:bg-slate-800/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Check out some of my recent software development projects</p>
+                    <div class="w-16 h-1 bg-sky-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <!-- Filter Tags -->
+                <div class="flex justify-center flex-wrap gap-2 mb-10">
+                    <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 rounded-xl text-sm font-medium transition-all bg-sky-600 text-white shadow-md shadow-sky-500/20" data-filter="all">
+                        All Projects
+                    </button>
+                    <button onclick="filterProjects('fullstack')" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" data-filter="fullstack">
+                        Full Stack
+                    </button>
+                    <button onclick="filterProjects('frontend')" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" data-filter="frontend">
+                        Frontend
+                    </button>
+                </div>
+
+                <!-- Projects Gallery Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Project 1: E-Commerce Website -->
+                    <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-category="fullstack">
+                        <div class="h-48 bg-gradient-to-br from-sky-600 to-indigo-800 p-6 flex flex-col justify-between text-white relative">
+                            <span class="self-start px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md border border-white/20">Full Stack</span>
+                            <div>
+                                <i class="fa-solid fa-cart-shopping text-4xl mb-2 text-sky-200"></i>
+                                <h3 class="text-xl font-bold">E-Commerce Website</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Modern online store built with React, Node.js, Express, and MongoDB featuring dynamic cart management, user authentication, and REST APIs.
+                            </p>
+                            <div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">React</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Node.js</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Express</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MongoDB</span>
+                                </div>
+                                <div class="flex items-center gap-3 border-t border-slate-200 dark:border-slate-800/80 pt-4">
+                                    <button onclick="showProjectDetails('E-Commerce Website', 'Full-stack online shopping web app featuring item catalogs, dynamic cart updates, MongoDB persistence, and RESTful API interactions.')" class="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-semibold text-xs flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-info"></i> View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Student Management System -->
+                    <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-category="fullstack">
+                        <div class="h-48 bg-gradient-to-br from-emerald-600 to-teal-800 p-6 flex flex-col justify-between text-white relative">
+                            <span class="self-start px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md border border-white/20">Full Stack</span>
+                            <div>
+                                <i class="fa-solid fa-graduation-cap text-4xl mb-2 text-emerald-200"></i>
+                                <h3 class="text-xl font-bold">Student Management System</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Comprehensive management platform for tracking student records, courses, and grades with robust CRUD database integration and role-based access.
+                            </p>
+                            <div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Node.js</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SQL / Express</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">JavaScript</span>
+                                </div>
+                                <div class="flex items-center gap-3 border-t border-slate-200 dark:border-slate-800/80 pt-4">
+                                    <button onclick="showProjectDetails('Student Management System', 'Complete database-backed web portal for recording academic profiles, course enrollment, grade calculations, and detailed student reporting.')" class="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-semibold text-xs flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-info"></i> View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Interactive Web App Platform -->
+                    <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" data-category="frontend">
+                        <div class="h-48 bg-gradient-to-br from-purple-600 to-indigo-800 p-6 flex flex-col justify-between text-white relative">
+                            <span class="self-start px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md border border-white/20">Frontend</span>
+                            <div>
+                                <i class="fa-solid fa-laptop-code text-4xl mb-2 text-purple-200"></i>
+                                <h3 class="text-xl font-bold">Interactive Web App Platform</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Custom web application showcasing dynamic reactive user interfaces, real-time client-side calculations, and external API integrations.
+                            </p>
+                            <div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">React</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">HTML5 / CSS3</span>
+                                    <span class="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">REST APIs</span>
+                                </div>
+                                <div class="flex items-center gap-3 border-t border-slate-200 dark:border-slate-800/80 pt-4">
+                                    <button onclick="showProjectDetails('Interactive Web App Platform', 'Frontend application focused on fluid layout transitions, dark/light theme options, responsive components, and asynchronous API data fetching.')" class="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-semibold text-xs flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-info"></i> View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Get In Touch</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Have a question or want to work together? Send me a message!</p>
+                    <div class="w-16 h-1 bg-sky-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Contact Information Sidebar -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-6">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Contact Information</h3>
+                            
+                            <!-- Detail: Education / Location -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Institution</h4>
+                                    <p class="text-sm font-medium text-slate-800 dark:text-slate-200 mt-0.5">NCBAE Campus</p>
+                                </div>
+                            </div>
+
+                            <!-- Detail: Email Placeholder -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Email</h4>
+                                    <a href="mailto:maaz.ahmad@example.com" class="text-sm font-medium text-sky-600 dark:text-sky-400 hover:underline mt-0.5 block">
+                                        maaz.ahmad@example.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Social Profiles Links -->
+                            <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <h4 class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold mb-3">Connect on Socials</h4>
+                                <div class="flex items-center gap-3">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white flex items-center justify-center transition-all">
+                                        <i class="fa-brands fa-github text-lg"></i>
+                                    </a>
+                                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white flex items-center justify-center transition-all">
+                                        <i class="fa-brands fa-linkedin-in text-lg"></i>
+                                    </a>
+                                    <a href="mailto:maaz.ahmad@example.com" aria-label="Send Direct Email" class="w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sky-500 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white flex items-center justify-center transition-all">
+                                        <i class="fa-solid fa-paper-plane text-base"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Contact Form -->
+                    <div class="lg:col-span-7">
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
+                                    <input type="text" id="name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Your Email</label>
+                                    <input type="email" id="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Subject</label>
+                                <input type="text" id="subject" required placeholder="Project Inquiry / Collaboration" class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">Message</label>
+                                <textarea id="message" rows="4" required placeholder="Hello Maaz, I'd like to talk about..." class="w-full px-4 py-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" id="submit-btn" class="w-full py-3.5 px-6 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-medium shadow-lg shadow-sky-500/20 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-sm"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 bg-slate-100/50 dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500 dark:text-slate-400">
+            <p>© 2026 Maaz Ahmad. Built with React, JavaScript, and Modern Web Standards.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL BOX (Replaces alert) -->
+    <div id="modal-overlay" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h3 id="modal-title" class="text-lg font-bold text-slate-900 dark:text-white">Notification</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <!-- Dynamic Content -->
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Dark/Light Mode Switcher Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check local storage or system preferences on load
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Project Filtering ---
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Toggle active styles on buttons
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-filter') === category) {
+                    btn.className = "filter-btn active px-4 py-2 rounded-xl text-sm font-medium transition-all bg-sky-600 text-white shadow-md shadow-sky-500/20";
+                } else {
+                    btn.className = "filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all";
+                }
+            });
+
+            // Show/Hide Project Cards
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- Modal Handler ---
+        function showModal(title, bodyText) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = bodyText;
+            document.getElementById('modal-overlay').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.add('hidden');
+        }
+
+        function showProjectDetails(title, description) {
+            showModal(title, description);
+        }
+
+        function downloadResumeSim() {
+            showModal("Resume Download", "Downloading Maaz Ahmad's Resume (BS IT - Frontend & Full-Stack Developer).");
+        }
+
+        // --- Form Simulation ---
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const btn = document.getElementById('submit-btn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Sending...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane text-sm"></i> Send Message';
+                document.getElementById('contact-form').reset();
+                showModal("Message Sent!", `Thank you, ${name}. Your message has been sent successfully. Maaz will get back to you soon!`);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
